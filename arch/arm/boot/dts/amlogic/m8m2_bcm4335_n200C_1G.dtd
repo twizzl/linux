@@ -277,11 +277,25 @@
 			irq_out = <0x5>;
 			card_type = <0x5>;
 		};
+
+		sdio {
+			status = "ok";
+			port = <0x0>;
+			pinname = "sdio";
+			ocr_avail = <0x200000>;
+			caps = "MMC_CAP_4_BIT_DATA", "MMC_CAP_SDIO_IRQ", "MMC_CAP_MMC_HIGHSPEED", "MMC_CAP_SD_HIGHSPEED", "MMC_PM_IGNORE_PM_NOTIFY", "MMC_PM_KEEP_POWER";
+			f_min = <0x493e0>;
+			f_max = <0x2faf080>;
+			max_req_size = <0x20000>;
+			card_type = <0x3>;
+			wifi-control-func = <0x1>;
+		};
 	};
 
 	sdhc {
 		compatible = "amlogic,aml_sdhc";
 		dev_name = "aml_sdhc.0";
+		status = "okay";
 		reg = <0xc1108e00 0x3c>;
 		pinctrl-names = "sdhc_sd_clk_cmd_pins", "sdhc_sd_all_pins", "sdhc_emmc_clk_cmd_pins", "sdhc_emmc_all_pins", "sdhc_sdio_clk_cmd_pins", "sdhc_sdio_all_pins";
 		pinctrl-0 = <0xd>;
@@ -303,18 +317,6 @@
 			max_req_size = <0x20000>;
 			gpio_dat3 = "BOOT_3";
 			card_type = <0x1>;
-		};
-
-		sdio {
-			status = "okay";
-			port = <0x3>;
-			pinname = "sdio";
-			ocr_avail = <0x200080>;
-			caps = "MMC_CAP_4_BIT_DATA", "MMC_CAP_MMC_HIGHSPEED", "MMC_CAP_SD_HIGHSPEED", "MMC_CAP_NONREMOVABLE", "MMC_CAP_UHS_SDR12", "MMC_CAP_UHS_SDR25", "MMC_CAP_UHS_SDR50", "MMC_CAP_UHS_SDR104";
-			f_min = <0x493e0>;
-			f_max = <0x5f5e100>;
-			max_req_size = <0x20000>;
-			card_type = <0x3>;
 		};
 	};
 
@@ -909,7 +911,7 @@
 
 		sdhc_sdio_clk_cmd_pins {
 			amlogic,setmask = <0x5 0xc00>;
-			amlogic,clrmask = <0x2 0xf0 0x4 0x7c000000 0x8 0x3f>;
+			amlogic,clrmask = <0x2 0x58000f0 0x4 0x7c000000 0x8 0x3f>;
 			amlogic,pins = "GPIOX_8", "GPIOX_9";
 			amlogic,enable-output = <0x1>;
 			amlogic,pullup = <0x1>;
@@ -920,7 +922,7 @@
 
 		sdhc_sdio_all_pins {
 			amlogic,setmask = <0x5 0x6c00>;
-			amlogic,clrmask = <0x2 0xf0 0x4 0x7c000000 0x8 0x3f>;
+			amlogic,clrmask = <0x2 0x58000f0 0x4 0x7c000000 0x8 0x3f>;
 			amlogic,pins = "GPIOX_0", "GPIOX_1", "GPIOX_2", "GPIOX_3", "GPIOX_8", "GPIOX_9";
 			amlogic,enable-output = <0x1>;
 			amlogic,pullup = <0x1>;
